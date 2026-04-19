@@ -9,16 +9,19 @@ import SwiftUI
 
 struct FavoritesListView: View {
     let favorites: [Breeds]
-    @State private var title: String = ""
+    @State var title: String = ""
     
     var body: some View {
-        TextField("My favorites", text: $title).padding().font(Font.largeTitle).bold()
-        
-        List(favorites, id: \.id) { breed in
-            Text(breed.attributes.name)
+        ZStack {
+            Color.red.opacity(0.1).ignoresSafeArea()
+            VStack{
+                TextField("Favorites", text: $title).padding().font(Font.largeTitle).bold().background(RoundedRectangle(cornerRadius: 12).fill(Color.white)).frame(width:375)
+                
+                List(favorites, id: \.id) { breed in
+                    Text(breed.attributes.name)
+                }.scrollContentBackground(.hidden)
+            }
         }
-        
-     
          
     }
 }
